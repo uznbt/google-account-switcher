@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Google Account Switcher",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "Secara otomatis mengarahkan link Google Workspace (Drive, Docs, dll) & Gemini ke akun yang Anda tentukan.",
   "permissions": [
     "storage",
@@ -21,6 +21,10 @@
   "action": {
     "default_popup": "src/html/popup.html",
     "default_icon": "assets/images/icon.png"
+  },
+  "options_ui": {
+    "page": "src/html/options.html",
+    "open_in_tab": true
   },
   "icons": {
     "16": "assets/images/icon.png",

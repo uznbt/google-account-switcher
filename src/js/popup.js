@@ -74,6 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
+  const openSettingsBtn = document.getElementById('openSettingsBtn');
+  if (openSettingsBtn) {
+    openSettingsBtn.addEventListener('click', () => {
+      chrome.runtime.openOptionsPage();
+    });
+  }
+  
   // Toggle custom select open/close
   selectTrigger.addEventListener('click', (e) => {
     e.stopPropagation();
