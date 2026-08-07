@@ -22,7 +22,9 @@ jobs:
 
       - name: Build CRX file
         run: |
-          cat AkunSwitcher.zip | npx -y crx3 -p AkunSwitcher.pem
+          mkdir temp_build
+          unzip AkunSwitcher.zip -d temp_build
+          npx -y crx3 -p AkunSwitcher.pem -o AkunSwitcher.crx temp_build/
 
       - name: Release
         uses: softprops/action-gh-release@v2
