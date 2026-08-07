@@ -5,12 +5,13 @@
 </p>
 
 # Google Account Switcher
-![Version](https://img.shields.io/badge/Version-1.3.0-4285F4.svg)
+![Version](https://img.shields.io/badge/Version-1.3.1-4285F4.svg)
 
 Sebuah ekstensi Google Chrome yang memungkinkan Anda untuk dengan mudah mengatur dan berpindah antar akun Google Workspace untuk berbagai layanan Google (Drive, Docs, Mail, Meet, Classroom, Gemini) langsung dari satu antarmuka pop-up.
 
 ## Fitur Utama
 
+- **Master Kill-Switch:** Tombol sakelar utama untuk mematikan atau menyalakan seluruh fungsi ekstensi secara instan tanpa perlu masuk ke pengaturan satu per satu.
 - **Pemilihan Akun Independen:** Tetapkan indeks akun Google tertentu (misal: Akun 0, Akun 1) untuk masing-masing layanan Google secara terpisah.
 - **Aturan Tautan Khusus (Custom Link Rules):** Atur pengecualian khusus untuk tautan atau folder tertentu agar dibuka dengan akun yang berbeda dari pengaturan global.
 - **Auto-Fallback (Pencarian Akun Otomatis):** Secara otomatis mencari dan mencoba akun lain jika akun bawaan Anda diblokir atau diarahkan ke halaman "Anda memerlukan akses".
