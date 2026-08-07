@@ -51,7 +51,7 @@ Sebuah ekstensi Google Chrome yang memungkinkan Anda untuk dengan mudah mengatur
 
 Proyek ini adalah proyek independen dan **tidak** berafiliasi, disponsori, didukung, atau memiliki hubungan resmi dalam bentuk apa pun dengan Google LLC atau anak perusahaannya. Semua nama produk, logo, dan merek (termasuk Google Drive, Google Docs, Gmail, Google Meet, Google Classroom, dan Google Gemini) adalah hak milik dari pemilik aslinya. 
 
-Penggunaan ekstensi ini sepenuhnya merupakan risiko Anda sendiri. Pengembang tidak bertanggung jawab atas kerusakan, kehilangan data, penyalahgunaan, atau masalah apa pun yang mungkin timbul akibat penggunaan ekstensi ini.
+Penggunaan ekstensi ini sepenuhnya merupakan risiko Anda sendiri. Pengembang tidak bertanggung jawab atas kerusakan, kehilangan data, penyalahgunaan, atau masalah apa pun yang mungkin timbul akibat penggunaan ekstensi ini. **Sebelum mengunduh dan memasang ekstensi ini, pastikan Anda telah membaca dan memahami keseluruhan kode sumber yang tersedia secara terbuka di repositori ini.**
 
 ## Lisensi
 
