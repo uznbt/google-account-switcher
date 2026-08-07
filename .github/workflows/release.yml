@@ -18,7 +18,7 @@ jobs:
 
       - name: Create ZIP file
         run: |
-          zip -r AkunSwitcher.zip . -x "*.git*" -x ".github/*" -x "icon.svg" -x "*.md"
+          zip -r AkunSwitcher.zip . -x "*.git*" -x ".github/*" -x "assets/images/icon.svg" -x "*.md"
 
       - name: Build CRX file
         run: |

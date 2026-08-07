@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Drive Account Switcher</title>
-  <link rel="stylesheet" href="popup.css">
+  <title>Google Account Switcher</title>
+  <link rel="stylesheet" href="../css/popup.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div class="logo">
-        <img src="icon.png" alt="Logo" width="32" height="32">
+        <img src="../../assets/images/icon.png" alt="Logo" width="32" height="32">
         <h2>Akun Switcher</h2>
       </div>
       <div class="theme-switcher" id="themeSwitcher">
@@ -36,34 +36,34 @@
       <div class="custom-select-wrapper" id="serviceSelectWrapper">
         <div class="custom-select" id="serviceSelectTrigger">
           <div class="selected-account" id="selectedServiceDisplay">
-            <img src="icons/drive.webp" alt="Drive" class="service-icon">
+            <img src="../../assets/icons/drive.webp" alt="Drive" class="service-icon">
             <span class="selected-text" style="font-weight: 500;">Google Drive</span>
           </div>
           <svg class="dropdown-arrow" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </div>
         <div class="custom-options" id="serviceOptions">
           <div class="account-option service-option selected" data-value="drive">
-            <img src="icons/drive.webp" alt="Drive" class="service-icon">
+            <img src="../../assets/icons/drive.webp" alt="Drive" class="service-icon">
             <span class="account-name">Google Drive</span>
           </div>
           <div class="account-option service-option" data-value="gemini">
-            <img src="icons/gemini.png" alt="Gemini" class="service-icon">
+            <img src="../../assets/icons/gemini.png" alt="Gemini" class="service-icon">
             <span class="account-name">Google Gemini</span>
           </div>
           <div class="account-option service-option" data-value="classroom">
-            <img src="icons/classroom.png" alt="Classroom" class="service-icon">
+            <img src="../../assets/icons/classroom.png" alt="Classroom" class="service-icon">
             <span class="account-name">Google Classroom</span>
           </div>
           <div class="account-option service-option" data-value="mail">
-            <img src="icons/mail.webp" alt="Gmail" class="service-icon">
+            <img src="../../assets/icons/mail.webp" alt="Gmail" class="service-icon">
             <span class="account-name">Gmail</span>
           </div>
           <div class="account-option service-option" data-value="meet">
-            <img src="icons/meet.webp" alt="Meet" class="service-icon">
+            <img src="../../assets/icons/meet.webp" alt="Meet" class="service-icon">
             <span class="account-name">Google Meet</span>
           </div>
           <div class="account-option service-option" data-value="docs">
-            <img src="icons/docs.webp" alt="Docs" class="service-icon">
+            <img src="../../assets/icons/docs.webp" alt="Docs" class="service-icon">
             <span class="account-name">Google Docs</span>
           </div>
         </div>
@@ -105,8 +105,9 @@
       </label>
       <span class="label-text">Aktifkan Auto-Redirect Link</span>
     </div>
+    <div id="status"></div>
 
   </div>
-  <script src="popup.js"></script>
+  <script src="../js/popup.js"></script>
 </body>
 </html>

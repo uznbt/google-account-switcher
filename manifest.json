@@ -12,23 +12,29 @@
   "host_permissions": [
     "*://*.google.com/*"
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/images/default_avatar.png"],
+      "matches": ["*://*.google.com/*"]
+    }
+  ],
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": "icon.png"
+    "default_popup": "src/html/popup.html",
+    "default_icon": "assets/images/icon.png"
   },
   "icons": {
-    "16": "icon.png",
-    "32": "icon.png",
-    "48": "icon.png",
-    "128": "icon.png"
+    "16": "assets/images/icon.png",
+    "32": "assets/images/icon.png",
+    "48": "assets/images/icon.png",
+    "128": "assets/images/icon.png"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "src/js/background.js"
   },
   "content_scripts": [
     {
       "matches": ["*://*.google.com/*"],
-      "js": ["content.js"],
+      "js": ["src/js/content.js"],
       "run_at": "document_idle",
       "all_frames": true
     }

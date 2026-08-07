@@ -17,7 +17,7 @@ function scanAccounts() {
                 let index = authMatch ? parseInt(authMatch[1]) : accounts.length;
 
                 let img = container.querySelector('img');
-                let avatarUrl = img ? img.src : "default_avatar.png";
+                let avatarUrl = img ? img.src : chrome.runtime.getURL('assets/images/default_avatar.png');
 
                 let name = "Akun " + index;
                 let nameLines = [];

@@ -53,6 +53,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const serviceOptions = document.querySelectorAll('.service-option');
   const selectedServiceDisplay = document.getElementById('selectedServiceDisplay');
   
+  const serviceIcons = {
+    'drive': '../../assets/icons/drive.webp',
+    'gemini': '../../assets/icons/gemini.png',
+    'classroom': '../../assets/icons/classroom.png',
+    'mail': '../../assets/icons/mail.webp',
+    'meet': '../../assets/icons/meet.webp',
+    'docs': '../../assets/icons/docs.webp'
+  };
   let serviceAccounts = {
     drive: "0", gemini: "0", classroom: "0", mail: "0", meet: "0", docs: "0"
   };
@@ -192,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   let index = authMatch ? parseInt(authMatch[1]) : accounts.length;
                   
                   let img = container.querySelector('img');
-                  let avatarUrl = img ? img.src : "default_avatar.png";
+                  let avatarUrl = img ? img.src : chrome.runtime.getURL('assets/images/default_avatar.png');
                   
                   let name = "Akun " + index;
                   let nameLines = [];
