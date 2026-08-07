@@ -5,7 +5,7 @@
 </p>
 
 # Google Account Switcher
-![Version](https://img.shields.io/badge/Version-1.3.3-4285F4.svg)
+![Version](https://img.shields.io/badge/Version-1.3.4-4285F4.svg)
 
 Sebuah ekstensi Google Chrome yang memungkinkan Anda untuk dengan mudah mengatur dan berpindah antar akun Google Workspace untuk berbagai layanan Google (Drive, Docs, Mail, Meet, Classroom, Gemini) langsung dari satu antarmuka pop-up.
 
