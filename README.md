@@ -37,7 +37,7 @@ Sebuah ekstensi Google Chrome yang memungkinkan Anda untuk dengan mudah mengatur
 ## Cara Kerja Ekstensi
 
 1. **Penyimpanan Lokal (chrome.storage)**: Saat Anda memilih akun untuk layanan tertentu melalui antarmuka pop-up, ekstensi akan menyimpan pengaturan tersebut (berupa angka indeks akun seperti `0`, `1`, `2`) ke dalam penyimpanan lokal peramban Anda.
-2. **Sinkronisasi Akun**: Ekstensi dapat menyinkronkan daftar akun dengan cara membaca halaman opsi keluar Google secara otomatis. Dari sana, ekstensi mengenali profil akun beserta gambar avatarnya (hanya membaca data publik secara lokal tanpa memerlukan kata sandi).
+2. **Proses Sinkronisasi Akun**: Ketika tombol "Sinkronkan Akun" ditekan, ekstensi akan secara otomatis membuka tab sementara di latar belakang yang mengarah ke halaman `SignOutOptions` Google. Ekstensi kemudian menyuntikkan skrip konten (content script) untuk mengekstrak daftar akun (indeks, nama, email, dan URL avatar). Setelah data berhasil diamankan dan disimpan ke penyimpanan lokal, tab sementara tersebut akan otomatis ditutup.
 3. **Pengalihan Tautan (Web Navigation)**: Ekstensi secara aktif memantau lalu lintas peramban Anda (menggunakan API `chrome.webNavigation`). Ketika mendeteksi Anda membuka layanan Google tertentu (misalnya `drive.google.com`) tanpa parameter akun yang spesifik, ekstensi akan langsung menyisipkan URL parameter (`?authuser=X` atau `/u/X/`) sesuai dengan akun yang Anda pilih sebelumnya, lalu memuat ulang halaman tersebut dengan akun yang tepat.
 
 ## Lisensi
