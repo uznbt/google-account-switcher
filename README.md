@@ -47,6 +47,12 @@ Sebuah ekstensi Google Chrome yang memungkinkan Anda untuk dengan mudah mengatur
 2. **Proses Sinkronisasi Akun**: Ketika tombol "Sinkronkan Akun" ditekan, ekstensi akan secara otomatis membuka tab sementara di latar belakang yang mengarah ke halaman `SignOutOptions` Google. Ekstensi kemudian menyuntikkan skrip konten (content script) untuk mengekstrak daftar akun (indeks, nama, email, dan URL avatar). Setelah data berhasil diamankan dan disimpan ke penyimpanan lokal, tab sementara tersebut akan otomatis ditutup.
 3. **Pengalihan Tautan (Web Navigation)**: Ekstensi secara aktif memantau lalu lintas peramban Anda (menggunakan API `chrome.webNavigation`). Ketika mendeteksi Anda membuka layanan Google tertentu (misalnya `drive.google.com`) tanpa parameter akun yang spesifik, ekstensi akan langsung menyisipkan URL parameter (`?authuser=X` atau `/u/X/`) sesuai dengan akun yang Anda pilih sebelumnya, lalu memuat ulang halaman tersebut dengan akun yang tepat.
 
+## Penafian (Disclaimer)
+
+Proyek ini adalah proyek independen dan **tidak** berafiliasi, disponsori, didukung, atau memiliki hubungan resmi dalam bentuk apa pun dengan Google LLC atau anak perusahaannya. Semua nama produk, logo, dan merek (termasuk Google Drive, Google Docs, Gmail, Google Meet, Google Classroom, dan Google Gemini) adalah hak milik dari pemilik aslinya. 
+
+Penggunaan ekstensi ini sepenuhnya merupakan risiko Anda sendiri. Pengembang tidak bertanggung jawab atas kerusakan, kehilangan data, penyalahgunaan, atau masalah apa pun yang mungkin timbul akibat penggunaan ekstensi ini.
+
 ## Lisensi
 
 Proyek ini bersifat sumber terbuka (open-source) dan bebas untuk digunakan.
