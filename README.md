@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="assets/images/icon.png" width="128" height="128" alt="Logo Akun Google Switcher">
+  <img src="assets/images/icon.png" width="128" height="128" alt="Logo Google Account Switcher">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="assets/icons/google.png" width="128" height="128" alt="Google Logo">
 </p>
 
-# Akun Google Switcher
-![Version](https://img.shields.io/badge/Version-1.1.2-4285F4.svg)
+# Google Account Switcher
+![Version](https://img.shields.io/badge/Version-1.1.3-4285F4.svg)
 
 Sebuah ekstensi Google Chrome yang memungkinkan Anda untuk dengan mudah mengatur dan berpindah antar akun Google Workspace untuk berbagai layanan Google (Drive, Docs, Mail, Meet, Classroom, Gemini) langsung dari satu antarmuka pop-up.
 

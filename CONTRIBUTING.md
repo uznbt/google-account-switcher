@@ -1,6 +1,6 @@
 # Panduan Berkontribusi
 
-Terima kasih atas ketertarikan Anda untuk berkontribusi pada proyek Akun Google Switcher! Kami menyambut baik segala bentuk kontribusi, baik itu pelaporan kutu (bug), usulan fitur baru, perbaikan dokumentasi, maupun pengajuan kode (pull request).
+Terima kasih atas ketertarikan Anda untuk berkontribusi pada proyek Google Account Switcher! Kami menyambut baik segala bentuk kontribusi, baik itu pelaporan kutu (bug), usulan fitur baru, perbaikan dokumentasi, maupun pengajuan kode (pull request).
 
 ## Cara Melaporkan Masalah (Bug)
 
