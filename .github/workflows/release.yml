@@ -18,24 +18,24 @@ jobs:
 
       - name: Create ZIP file
         run: |
-          zip -r AkunSwitcher.zip . -x "*.git*" -x ".github/*" -x "assets/images/icon.svg" -x "*.md"
+          zip -r GoogleAccountSwitcher.zip . -x "*.git*" -x ".github/*" -x "assets/images/icon.svg" -x "*.md"
 
       - name: Build CRX file
         run: |
           mkdir temp_build
-          unzip AkunSwitcher.zip -d temp_build
-          npx -y crx3 -p AkunSwitcher.pem -o AkunSwitcher.crx temp_build/
+          unzip GoogleAccountSwitcher.zip -d temp_build
+          npx -y crx3 -p GoogleAccountSwitcher.pem -o GoogleAccountSwitcher.crx temp_build/
 
       - name: Build XPI file (Firefox)
         run: |
-          cp AkunSwitcher.zip AkunSwitcher.xpi
+          cp GoogleAccountSwitcher.zip GoogleAccountSwitcher.xpi
 
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            AkunSwitcher.zip
-            AkunSwitcher.crx
-            AkunSwitcher.xpi
+            GoogleAccountSwitcher.zip
+            GoogleAccountSwitcher.crx
+            GoogleAccountSwitcher.xpi
           generate_release_notes: true

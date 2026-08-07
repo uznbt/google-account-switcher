@@ -27,10 +27,10 @@ Sebuah ekstensi Google Chrome yang memungkinkan Anda untuk dengan mudah mengatur
 
 ### Metode 1: Pasang melalui CRX (Disarankan)
 1. Buka halaman Releases di repositori GitHub ini.
-2. Unduh file `AkunSwitcher.crx` dari rilis terbaru.
+2. Unduh file `GoogleAccountSwitcher.crx` dari rilis terbaru.
 3. Buka browser Google Chrome dan navigasikan ke `chrome://extensions/`.
 4. Aktifkan mode pengembang (Developer mode) di sudut kanan atas.
-5. Seret dan jatuhkan (drag and drop) file `AkunSwitcher.crx` yang telah diunduh ke halaman ekstensi tersebut untuk memasangnya.
+5. Seret dan jatuhkan (drag and drop) file `GoogleAccountSwitcher.crx` yang telah diunduh ke halaman ekstensi tersebut untuk memasangnya.
 
 ### Metode 2: Muat Tanpa Kemasan (Untuk Pengembang)
 1. Klon (clone) repositori ini atau unduh kode sumber dalam format ZIP.
