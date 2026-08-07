@@ -53,6 +53,8 @@ Proyek ini adalah proyek independen dan **tidak** berafiliasi, disponsori, diduk
 
 Penggunaan ekstensi ini sepenuhnya merupakan risiko Anda sendiri. Pengembang tidak bertanggung jawab atas kerusakan, kehilangan data, penyalahgunaan, atau masalah apa pun yang mungkin timbul akibat penggunaan ekstensi ini. **Sebelum mengunduh dan memasang ekstensi ini, pastikan Anda telah membaca dan memahami keseluruhan kode sumber yang tersedia secara terbuka di repositori ini.**
 
+**Dengan mengunduh dan menggunakan ekstensi ini, Anda dianggap telah menyetujui dan bersedia menanggung segala risiko secara mandiri sesuai dengan ketentuan di atas.**
+
 ## Lisensi
 
 Proyek ini bersifat sumber terbuka (open-source) dan bebas untuk digunakan.
