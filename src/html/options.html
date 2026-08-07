@@ -50,6 +50,52 @@
                <span class="desc">Jika dimatikan, ekstensi tidak akan mengalihkan tautan layanan apapun.</span>
             </div>
           </label>
+          <label class="toggle-container large-toggle" style="margin-top: 16px;">
+            <input type="checkbox" id="autoFallback">
+            <div class="checkbox-visual">
+               <svg viewBox="0 0 24 24" width="16" height="16" stroke="white" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="label-text">
+               <strong>Auto-Fallback (Pencarian Akun Otomatis)</strong>
+               <span class="desc">Mencoba mencari akun lain secara otomatis saat halaman "Anda memerlukan akses" terdeteksi.</span>
+            </div>
+          </label>
+        </div>
+      </section>
+
+      <section class="section custom-rules-section">
+        <div class="section-header">
+          <h2>Aturan Tautan Khusus</h2>
+          <p>Tentukan akun spesifik untuk tautan tertentu. Aturan ini akan mengabaikan pengaturan pengalihan layanan di atas.</p>
+        </div>
+
+        <div class="add-rule-container" style="display: flex; gap: 12px; margin-bottom: 24px; align-items: flex-start;">
+          <div style="flex: 1;">
+             <input type="text" id="newRuleUrl" class="text-input" placeholder="Tempel URL atau ID (misal: /drive/folders/ABC)" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); font-family: inherit; font-size: 14px; outline: none; box-sizing: border-box;">
+          </div>
+          
+          <div class="custom-select-wrapper" style="width: 250px;">
+            <div class="custom-select" id="newRuleAccountSelect" tabindex="0">
+              <div class="select-trigger" style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer;">
+                <div class="selected-display" id="newRuleSelectedDisplay" style="display: flex; align-items: center; gap: 8px;">
+                   <img src="../../assets/images/default_avatar.png" alt="Avatar" class="avatar" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
+                   <span class="name" style="font-size: 14px; font-weight: 500;">Pilih Akun...</span>
+                </div>
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </div>
+              <div class="custom-options" id="newRuleAccountOptions" style="position: absolute; width: 100%; top: calc(100% + 4px); left: 0; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; max-height: 200px; overflow-y: auto; z-index: 20; display: none; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                <!-- Dinamis via JS -->
+              </div>
+            </div>
+          </div>
+          
+          <button class="btn btn-primary" id="addRuleBtn" style="height: 44px; padding: 0 24px;">
+            Tambah
+          </button>
+        </div>
+
+        <div class="rules-list" id="rulesList" style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Dinamis via JS -->
         </div>
       </section>
 

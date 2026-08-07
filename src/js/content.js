@@ -62,7 +62,40 @@ function scanAccounts() {
 
 const observer = new MutationObserver(() => {
     scanAccounts();
+    if (!window.hasSentFallbackMessage) {
+        checkForAccessDenied();
+    }
 });
 observer.observe(document.body, { childList: true, subtree: true });
 
 scanAccounts();
+checkForAccessDenied();
+
+function checkForAccessDenied() {
+  if (window.location.hostname === 'accounts.google.com') return;
+  
+  const title = document.title.toLowerCase();
+  const bodyText = document.body.innerText.toLowerCase();
+  const url = window.location.href;
+
+  const isAccessDenied = 
+    url.includes('requestaccess') ||
+    title.includes('memerlukan akses') || 
+    title.includes('you need access') ||
+    title.includes('minta akses') ||
+    title.includes('request access') ||
+    bodyText.includes('anda memerlukan akses') ||
+    bodyText.includes('you need access') ||
+    bodyText.includes('minta akses') ||
+    bodyText.includes('request access');
+
+  if (isAccessDenied) {
+    if (window.hasSentFallbackMessage) return;
+    window.hasSentFallbackMessage = true;
+
+    chrome.runtime.sendMessage({
+      action: "triggerAutoFallback",
+      url: window.location.href
+    });
+  }
+}

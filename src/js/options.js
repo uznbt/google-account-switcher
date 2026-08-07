@@ -54,16 +54,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Settings
   const autoRedirectCheckbox = document.getElementById('autoRedirect');
+  const autoFallbackCheckbox = document.getElementById('autoFallback');
   const servicesGrid = document.getElementById('servicesGrid');
   const accountsGrid = document.getElementById('accountsGrid');
   const serviceCardTemplate = document.getElementById('serviceCardTemplate');
+
+  // Custom Rules DOM
+  const newRuleUrlInput = document.getElementById('newRuleUrl');
+  const newRuleAccountSelect = document.getElementById('newRuleAccountSelect');
+  const newRuleAccountOptions = document.getElementById('newRuleAccountOptions');
+  const newRuleSelectedDisplay = document.getElementById('newRuleSelectedDisplay');
+  const newRuleAccountIndex = document.getElementById('newRuleAccountIndex');
+  const addRuleBtn = document.getElementById('addRuleBtn');
+  const rulesList = document.getElementById('rulesList');
+  let customLinkRules = [];
   
   // Initialize Data
-  chrome.storage.sync.get(['serviceAccounts', 'autoRedirectEnabled'], (data) => {
+  chrome.storage.sync.get(['serviceAccounts', 'autoRedirectEnabled', 'autoFallbackEnabled', 'customLinkRules'], (data) => {
     if (data.serviceAccounts) {
       serviceAccounts = { ...serviceAccounts, ...data.serviceAccounts };
     }
+    if (data.customLinkRules) {
+      customLinkRules = data.customLinkRules;
+    }
     autoRedirectCheckbox.checked = data.autoRedirectEnabled !== false; // default true
+    
+    if (autoFallbackCheckbox) {
+      autoFallbackCheckbox.checked = data.autoFallbackEnabled !== false; // default true
+      autoFallbackCheckbox.addEventListener('change', () => {
+        chrome.storage.sync.set({ autoFallbackEnabled: autoFallbackCheckbox.checked });
+      });
+    }
     
     // Fetch local accounts
     chrome.storage.local.get(['cachedGoogleAccounts'], (res) => {
@@ -83,6 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
       
       renderServices();
       renderAccountsGrid();
+      renderNewRuleOptions();
+      renderRules();
     });
   });
 
@@ -178,6 +201,99 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.custom-select.open').forEach(el => el.classList.remove('open'));
   });
 
+  // --- Custom Rules Logic ---
+  if (newRuleAccountSelect) {
+    newRuleAccountSelect.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('.custom-select.open').forEach(el => {
+        if (el !== newRuleAccountSelect) el.classList.remove('open');
+      });
+      newRuleAccountSelect.classList.toggle('open');
+    });
+  }
+
+  function renderNewRuleOptions() {
+    if (!newRuleAccountOptions) return;
+    newRuleAccountOptions.innerHTML = '';
+    cachedAccountsList.forEach(acc => {
+      const opt = document.createElement('div');
+      opt.className = 'account-option';
+      opt.style.cssText = "display: flex; align-items: center; gap: 8px; padding: 10px 14px; cursor: pointer;";
+      opt.innerHTML = `
+        <img src="${acc.avatarUrl}" alt="Avatar" class="avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
+        <div class="details" style="display: flex; flex-direction: column;">
+          <span class="name" style="font-size: 14px; font-weight: 500;">${acc.name}</span>
+        </div>
+      `;
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        newRuleAccountIndex.value = acc.index;
+        updateDisplay(newRuleSelectedDisplay, acc);
+        newRuleAccountSelect.classList.remove('open');
+      });
+      opt.addEventListener('mouseover', () => opt.style.background = 'var(--hover-bg)');
+      opt.addEventListener('mouseout', () => opt.style.background = 'transparent');
+      newRuleAccountOptions.appendChild(opt);
+    });
+    
+    if (cachedAccountsList.length > 0 && newRuleAccountIndex) {
+      newRuleAccountIndex.value = cachedAccountsList[0].index;
+      updateDisplay(newRuleSelectedDisplay, cachedAccountsList[0]);
+    }
+  }
+
+  if (addRuleBtn) {
+    addRuleBtn.addEventListener('click', () => {
+      const url = newRuleUrlInput.value.trim();
+      const accountIndex = newRuleAccountIndex.value;
+      
+      if (!url || !accountIndex) return;
+      
+      customLinkRules.push({ url, accountIndex, id: Date.now().toString() });
+      chrome.storage.sync.set({ customLinkRules }, () => {
+        newRuleUrlInput.value = '';
+        renderRules();
+      });
+    });
+  }
+
+  function renderRules() {
+    if (!rulesList) return;
+    if (customLinkRules.length === 0) {
+      rulesList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted); border: 1px dashed var(--border-color); border-radius: 8px;">Belum ada aturan tautan khusus.</div>';
+      return;
+    }
+    
+    rulesList.innerHTML = '';
+    customLinkRules.forEach(rule => {
+      const acc = cachedAccountsList.find(a => a.index.toString() === rule.accountIndex.toString());
+      const accountName = acc ? acc.name : `Akun ke-${parseInt(rule.accountIndex)+1}`;
+      
+      const item = document.createElement('div');
+      item.style.cssText = "display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--hover-bg); border: 1px solid var(--border-color); border-radius: 8px;";
+      
+      item.innerHTML = `
+        <div style="display: flex; flex-direction: column; gap: 4px; overflow: hidden; padding-right: 12px;">
+          <strong style="font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${rule.url}">${rule.url}</strong>
+          <span style="font-size: 13px; color: var(--text-muted);">Dibuka dengan: ${accountName}</span>
+        </div>
+        <button class="delete-rule-btn" data-id="${rule.id}" title="Hapus Aturan" style="background: none; border: none; cursor: pointer; color: #ef4444; padding: 8px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+        </button>
+      `;
+      
+      const delBtn = item.querySelector('.delete-rule-btn');
+      delBtn.addEventListener('mouseover', () => delBtn.style.background = '#fee2e2');
+      delBtn.addEventListener('mouseout', () => delBtn.style.background = 'none');
+      delBtn.addEventListener('click', () => {
+        customLinkRules = customLinkRules.filter(r => r.id !== rule.id);
+        chrome.storage.sync.set({ customLinkRules }, renderRules);
+      });
+      
+      rulesList.appendChild(item);
+    });
+  }
+
   function renderAccountsGrid() {
     accountsGrid.innerHTML = '';
     cachedAccountsList.forEach(acc => {
@@ -206,9 +322,15 @@ document.addEventListener('DOMContentLoaded', () => {
       renderServices();
       renderAccountsGrid();
     }
-    if (namespace === 'sync' && changes.serviceAccounts) {
-      serviceAccounts = { ...serviceAccounts, ...changes.serviceAccounts.newValue };
-      renderServices(); // update dropdown visuals
+    if (namespace === 'sync') {
+      if (changes.serviceAccounts) {
+        serviceAccounts = { ...serviceAccounts, ...changes.serviceAccounts.newValue };
+        renderServices();
+      }
+      if (changes.customLinkRules) {
+        customLinkRules = changes.customLinkRules.newValue;
+        renderRules();
+      }
     }
   });
 

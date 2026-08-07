@@ -411,21 +411,23 @@ button:active {
   margin-left: auto;
 }
 
-.settings-btn {
-  width: 32px;
-  height: 32px;
+.icon-btn {
+  width: 44px;
+  height: auto;
   padding: 0;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  color: var(--text-muted);
-  border-radius: 50%;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  color: var(--text-main);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
-.settings-btn:hover {
-  background-color: var(--border-color);
-  color: var(--text-main);
+.icon-btn:hover {
+  background-color: var(--hover-bg);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
 }

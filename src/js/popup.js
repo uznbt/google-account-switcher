@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const autoRedirectCheckbox = document.getElementById('autoRedirect');
+  const autoFallbackCheckbox = document.getElementById('autoFallback');
   
   // Elements for custom select
   const customSelectWrapper = document.getElementById('customSelectWrapper');
@@ -161,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Muat pengaturan yang tersimpan
-    chrome.storage.sync.get(['serviceAccounts', 'autoRedirectEnabled'], (data) => {
+    chrome.storage.sync.get(['serviceAccounts', 'autoRedirectEnabled', 'autoFallbackEnabled'], (data) => {
       if (data.serviceAccounts !== undefined) {
         serviceAccounts = { ...serviceAccounts, ...data.serviceAccounts };
       }
@@ -174,6 +175,14 @@ document.addEventListener('DOMContentLoaded', () => {
         autoRedirectCheckbox.checked = data.autoRedirectEnabled;
       } else {
         autoRedirectCheckbox.checked = true;
+      }
+      
+      if (autoFallbackCheckbox) {
+        if (data.autoFallbackEnabled !== undefined) {
+          autoFallbackCheckbox.checked = data.autoFallbackEnabled;
+        } else {
+          autoFallbackCheckbox.checked = true;
+        }
       }
       
       // 3. Deteksi akun Google yang sedang login
@@ -411,6 +420,12 @@ document.addEventListener('DOMContentLoaded', () => {
   autoRedirectCheckbox.addEventListener('change', () => {
     saveAndApplySettings();
   });
+
+  if (autoFallbackCheckbox) {
+    autoFallbackCheckbox.addEventListener('change', () => {
+      chrome.storage.sync.set({ autoFallbackEnabled: autoFallbackCheckbox.checked });
+    });
+  }
 
   // Fungsi untuk menyimpan pengaturan dan menerapkan redirect
   function saveAndApplySettings() {

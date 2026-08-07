@@ -5,17 +5,19 @@
 </p>
 
 # Google Account Switcher
-![Version](https://img.shields.io/badge/Version-1.2.1-4285F4.svg)
+![Version](https://img.shields.io/badge/Version-1.3.0-4285F4.svg)
 
 Sebuah ekstensi Google Chrome yang memungkinkan Anda untuk dengan mudah mengatur dan berpindah antar akun Google Workspace untuk berbagai layanan Google (Drive, Docs, Mail, Meet, Classroom, Gemini) langsung dari satu antarmuka pop-up.
 
 ## Fitur Utama
 
-- Pemilihan Akun Independen: Tetapkan indeks akun Google tertentu (misal: Akun 0, Akun 1) untuk masing-masing layanan Google secara terpisah.
-- Pengalihan Otomatis (Auto-Redirect): Secara otomatis mengalihkan Anda ke akun yang telah dipilih saat membuka tautan layanan Google yang didukung.
-- Dukungan Multi-Layanan: Mendukung Google Drive, Google Docs, Google Mail, Google Meet, Google Classroom, dan Google Gemini.
-- Tema Dinamis: Tersedia pilihan tema Terang, Gelap, dan Sistem (Default) untuk kenyamanan mata.
-- Sinkronisasi Akun Otomatis: Mengambil dan menyimpan daftar akun Google yang sedang masuk secara otomatis dari halaman opsi keluar Google untuk akurasi indeks.
+- **Pemilihan Akun Independen:** Tetapkan indeks akun Google tertentu (misal: Akun 0, Akun 1) untuk masing-masing layanan Google secara terpisah.
+- **Aturan Tautan Khusus (Custom Link Rules):** Atur pengecualian khusus untuk tautan atau folder tertentu agar dibuka dengan akun yang berbeda dari pengaturan global.
+- **Auto-Fallback (Pencarian Akun Otomatis):** Secara otomatis mencari dan mencoba akun lain jika akun bawaan Anda diblokir atau diarahkan ke halaman "Anda memerlukan akses".
+- **Pengalihan Otomatis (Auto-Redirect):** Secara otomatis mengalihkan Anda ke akun yang telah dipilih saat membuka tautan layanan Google yang didukung.
+- **Dukungan Multi-Layanan:** Mendukung Google Drive, Google Docs, Google Mail, Google Meet, Google Classroom, dan Google Gemini.
+- **Tema Dinamis:** Tersedia pilihan tema Terang, Gelap, dan Sistem (Default) untuk kenyamanan mata.
+- **Sinkronisasi Akun Otomatis:** Mengambil dan menyimpan daftar akun Google yang sedang masuk secara otomatis dari halaman opsi keluar Google untuk akurasi indeks.
 
 ## Cara Pemasangan
 
