@@ -15,8 +15,12 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["assets/images/default_avatar.png"],
-      "matches": ["*://*.google.com/*"]
+      "resources": [
+        "assets/images/default_avatar.png"
+      ],
+      "matches": [
+        "*://*.google.com/*"
+      ]
     }
   ],
   "action": {
@@ -42,7 +46,9 @@
         "*://*.google.com/*",
         "*://*.zoom.us/*"
       ],
-      "js": ["src/js/content.js"],
+      "js": [
+        "src/js/content.js"
+      ],
       "run_at": "document_idle",
       "all_frames": true
     }
