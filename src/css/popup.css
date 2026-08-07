@@ -77,9 +77,10 @@ body {
 
 h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--text-heading);
+  white-space: nowrap;
 }
 
 .description {
@@ -377,7 +378,6 @@ button:active {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
-  margin-left: auto;
 }
 .theme-btn {
   background: none;
@@ -402,4 +402,30 @@ button:active {
 }
 .theme-btn:active {
   transform: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.settings-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--text-muted);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-btn:hover {
+  background-color: var(--border-color);
+  color: var(--text-main);
 }
