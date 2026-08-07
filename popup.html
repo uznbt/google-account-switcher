@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drive Account Switcher</title>
+  <link rel="stylesheet" href="popup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <img src="icon.png" alt="Logo" width="32" height="32">
+        <h2>Akun Switcher</h2>
+      </div>
+      <div class="theme-switcher" id="themeSwitcher">
+        <button class="theme-btn active" data-theme-value="default" title="Sistem">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        </button>
+        <button class="theme-btn" data-theme-value="light" title="Terang">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <button class="theme-btn" data-theme-value="dark" title="Gelap">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+    </div>
+    
+    <p class="description">Pilih akun yang akan digunakan untuk membuka link Google Workspace (Drive, Docs, dll) & Gemini.</p>
+    
+    <div class="setting-group">
+      <label>Layanan Google</label>
+      
+      <!-- Custom Select for Service -->
+      <div class="custom-select-wrapper" id="serviceSelectWrapper">
+        <div class="custom-select" id="serviceSelectTrigger">
+          <div class="selected-account" id="selectedServiceDisplay">
+            <img src="icons/drive.webp" alt="Drive" class="service-icon">
+            <span class="selected-text" style="font-weight: 500;">Google Drive</span>
+          </div>
+          <svg class="dropdown-arrow" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="custom-options" id="serviceOptions">
+          <div class="account-option service-option selected" data-value="drive">
+            <img src="icons/drive.webp" alt="Drive" class="service-icon">
+            <span class="account-name">Google Drive</span>
+          </div>
+          <div class="account-option service-option" data-value="gemini">
+            <img src="icons/gemini.png" alt="Gemini" class="service-icon">
+            <span class="account-name">Google Gemini</span>
+          </div>
+          <div class="account-option service-option" data-value="classroom">
+            <img src="icons/classroom.png" alt="Classroom" class="service-icon">
+            <span class="account-name">Google Classroom</span>
+          </div>
+          <div class="account-option service-option" data-value="mail">
+            <img src="icons/mail.webp" alt="Gmail" class="service-icon">
+            <span class="account-name">Gmail</span>
+          </div>
+          <div class="account-option service-option" data-value="meet">
+            <img src="icons/meet.webp" alt="Meet" class="service-icon">
+            <span class="account-name">Google Meet</span>
+          </div>
+          <div class="account-option service-option" data-value="docs">
+            <img src="icons/docs.webp" alt="Docs" class="service-icon">
+            <span class="account-name">Google Docs</span>
+          </div>
+        </div>
+      </div>
+      <!-- Hidden input to store actual value -->
+      <input type="hidden" id="serviceSelect" value="drive">
+    </div>
+
+    <div class="setting-group">
+      <label>Pilih Akun untuk Layanan ini</label>
+      
+      <!-- Custom Select Dropdown -->
+      <div class="custom-select-wrapper" id="customSelectWrapper">
+        <div class="custom-select" id="selectTrigger">
+          <div class="selected-account" id="selectedAccountDisplay">
+            <span class="selected-text">Memuat akun...</span>
+          </div>
+          <svg class="dropdown-arrow" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="custom-options" id="customOptions">
+          <!-- Opsi akun akan dimuat di sini oleh JS -->
+        </div>
+      </div>
+      <!-- Hidden input to store the actual value -->
+      <input type="hidden" id="accountIndexValue" value="3">
+    </div>
+    
+    <button id="syncAccountsBtn" class="sync-btn" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #c2e7ff; background-color: #e8f0fe; color: #1a73e8; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background-color 0.2s; box-shadow: none;">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
+      </svg>
+      Sinkronkan Akun
+    </button>
+
+    <div class="setting-group checkbox-group">
+      <label class="switch">
+        <input type="checkbox" id="autoRedirect">
+        <span class="slider round"></span>
+      </label>
+      <span class="label-text">Aktifkan Auto-Redirect Link</span>
+    </div>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

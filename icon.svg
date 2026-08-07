@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6d6d" />
+      <stop offset="100%" stop-color="#d93025" />
+    </linearGradient>
+    
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#669df6" />
+      <stop offset="100%" stop-color="#1a73e8" />
+    </linearGradient>
+    
+    <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdd663" />
+      <stop offset="100%" stop-color="#f9ab00" />
+    </linearGradient>
+    
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5bb974" />
+      <stop offset="100%" stop-color="#1e8e3e" />
+    </linearGradient>
+    
+    <!-- Google Colors Gradient for the Border -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d93025" />
+      <stop offset="33%" stop-color="#f9ab00" />
+      <stop offset="66%" stop-color="#1e8e3e" />
+      <stop offset="100%" stop-color="#1a73e8" />
+    </linearGradient>
+  </defs>
+
+  <rect x="3" y="3" width="122" height="122" rx="25" fill="#ffffff" stroke="url(#borderGrad)" stroke-width="6" />
+  
+  <g>
+    <!-- Main User Avatar -->
+    <!-- Head: Google Red Gradient -->
+    <circle cx="64" cy="52" r="18" fill="url(#redGrad)" />
+    <!-- Body: Google Blue Gradient with rounded bottom corners -->
+    <path d="M 40 96 A 4 4 0 0 1 36 92 C 36 78 48 74 64 74 C 80 74 92 78 92 92 A 4 4 0 0 1 88 96 Z" fill="url(#blueGrad)" />
+    
+    <!-- White Cutout Outline for Arrows (Matched to Background) -->
+    <g fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 24 64 A 40 40 0 0 1 50 28" />
+      <polyline points="34,26 51,27 47,43" />
+      <path d="M 104 64 A 40 40 0 0 1 78 100" />
+      <polyline points="94,102 77,101 81,85" />
+    </g>
+
+    <!-- Circular Switch Arrows -->
+    <g fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Left Arrow Curve & Tip: Google Yellow Gradient -->
+      <path d="M 24 64 A 40 40 0 0 1 50 28" stroke="url(#yellowGrad)" fill="none" />
+      <polyline points="34,26 51,27 47,43" stroke="url(#yellowGrad)" fill="none" />
+      
+      <!-- Right Arrow Curve & Tip: Google Green Gradient -->
+      <path d="M 104 64 A 40 40 0 0 1 78 100" stroke="url(#greenGrad)" fill="none" />
+      <polyline points="94,102 77,101 81,85" stroke="url(#greenGrad)" fill="none" />
+    </g>
+  </g>
+</svg>
