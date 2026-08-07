@@ -1,5 +1,7 @@
 <p align="center">
   <img src="assets/images/icon.png" width="128" height="128" alt="Logo Akun Google Switcher">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/icons/google.png" width="128" height="128" alt="Google Logo">
 </p>
 
 # Akun Google Switcher
