@@ -5,6 +5,7 @@
   <title>Account Switcher - Pengaturan</title>
   <link rel="stylesheet" href="../css/options.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="../js/theme-init.js"></script>
 </head>
 <body>
   <div class="dashboard-container">
@@ -28,8 +29,26 @@
       </div>
     </header>
 
-    <main class="main-content">
-      <section class="section settings-section">
+    <div class="layout-body">
+      <aside class="sidebar">
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-item active" data-target="tab-settings">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            Layanan & Global
+          </a>
+          <a href="#" class="nav-item" data-target="tab-rules">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            Tautan Khusus
+          </a>
+          <a href="#" class="nav-item" data-target="tab-accounts">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Daftar Akun
+          </a>
+        </nav>
+      </aside>
+      
+      <main class="main-content">
+        <section id="tab-settings" class="section settings-section tab-panel active">
         <div class="section-header">
           <h2>Pengalihan Layanan Google</h2>
           <p>Tentukan akun mana yang akan terbuka secara otomatis untuk masing-masing layanan.</p>
@@ -40,6 +59,16 @@
         </div>
 
         <div class="global-toggles">
+          <label class="toggle-container large-toggle" style="margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 24px;">
+            <input type="checkbox" id="masterSwitch">
+            <div class="checkbox-visual">
+               <svg viewBox="0 0 24 24" width="16" height="16" stroke="white" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="label-text">
+               <strong style="color: var(--primary-color);">Ekstensi Aktif (Master Switch)</strong>
+               <span class="desc">Mematikan ini akan memberhentikan seluruh aktivitas ekstensi secara instan.</span>
+            </div>
+          </label>
           <label class="toggle-container large-toggle">
             <input type="checkbox" id="autoRedirect">
             <div class="checkbox-visual">
@@ -60,10 +89,40 @@
                <span class="desc">Mencoba mencari akun lain secara otomatis saat halaman "Anda memerlukan akses" terdeteksi.</span>
             </div>
           </label>
+          <label class="toggle-container large-toggle" style="margin-top: 16px;">
+            <input type="checkbox" id="autoMuteMic">
+            <div class="checkbox-visual">
+               <svg viewBox="0 0 24 24" width="16" height="16" stroke="white" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="label-text">
+               <strong>Auto-Mute Mikrofon Google Meet & Zoom</strong>
+               <span class="desc">Otomatis mematikan Mikrofon saat Anda memasuki ruang tunggu.</span>
+            </div>
+          </label>
+          <label class="toggle-container large-toggle" style="margin-top: 16px;">
+            <input type="checkbox" id="autoMuteCam">
+            <div class="checkbox-visual">
+               <svg viewBox="0 0 24 24" width="16" height="16" stroke="white" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="label-text">
+               <strong>Auto-Matikan Kamera Google Meet & Zoom</strong>
+               <span class="desc">Otomatis mematikan Kamera saat Anda memasuki ruang tunggu.</span>
+            </div>
+          </label>
+          <label class="toggle-container large-toggle" style="margin-top: 16px;">
+            <input type="checkbox" id="autoSaveForm">
+            <div class="checkbox-visual">
+               <svg viewBox="0 0 24 24" width="16" height="16" stroke="white" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="label-text">
+               <strong>Penyelamat Google Form (Auto-Save Drafts)</strong>
+               <span class="desc">Simpan otomatis ketikan di Google Form ke browser agar tidak hilang.</span>
+            </div>
+          </label>
         </div>
       </section>
 
-      <section class="section custom-rules-section">
+        <section id="tab-rules" class="section custom-rules-section tab-panel">
         <div class="section-header">
           <h2>Aturan Tautan Khusus</h2>
           <p>Tentukan akun spesifik untuk tautan tertentu. Aturan ini akan mengabaikan pengaturan pengalihan layanan di atas.</p>
@@ -83,10 +142,11 @@
                 </div>
                 <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </div>
-              <div class="custom-options" id="newRuleAccountOptions" style="position: absolute; width: 100%; top: calc(100% + 4px); left: 0; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; max-height: 200px; overflow-y: auto; z-index: 20; display: none; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+              <div class="custom-options" id="newRuleAccountOptions" style="position: absolute; width: 100%; top: calc(100% + 4px); left: 0; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; max-height: 200px; overflow-y: auto; z-index: 20; flex-direction: column;">
                 <!-- Dinamis via JS -->
               </div>
             </div>
+            <input type="hidden" id="newRuleAccountIndex">
           </div>
           
           <button class="btn btn-primary" id="addRuleBtn" style="height: 44px; padding: 0 24px;">
@@ -99,7 +159,7 @@
         </div>
       </section>
 
-      <section class="section accounts-section">
+        <section id="tab-accounts" class="section accounts-section tab-panel">
          <div class="section-header">
             <h2>Akun Tersinkronisasi</h2>
             <button class="btn btn-primary" id="syncAccountsBtn">
@@ -112,7 +172,8 @@
            <!-- Dinamis via JS -->
          </div>
       </section>
-    </main>
+      </main>
+    </div>
   </div>
   
   <!-- Template for custom select -->

@@ -16,8 +16,11 @@ Sebuah ekstensi Google Chrome yang memungkinkan Anda untuk dengan mudah mengatur
 - **Auto-Fallback (Pencarian Akun Otomatis):** Secara otomatis mencari dan mencoba akun lain jika akun bawaan Anda diblokir atau diarahkan ke halaman "Anda memerlukan akses".
 - **Pengalihan Otomatis (Auto-Redirect):** Secara otomatis mengalihkan Anda ke akun yang telah dipilih saat membuka tautan layanan Google yang didukung.
 - **Dukungan Multi-Layanan:** Mendukung Google Drive, Google Docs, Google Mail, Google Meet, Google Classroom, dan Google Gemini.
-- **Tema Dinamis:** Tersedia pilihan tema Terang, Gelap, dan Sistem (Default) untuk kenyamanan mata.
-- **Sinkronisasi Akun Otomatis:** Mengambil dan menyimpan daftar akun Google yang sedang masuk secara otomatis dari halaman opsi keluar Google untuk akurasi indeks.
+- **Auto-Mute Mikrofon & Kamera:** Mematikan mikrofon dan kamera secara otomatis saat Anda memasuki ruang tunggu Google Meet atau Zoom untuk mencegah kebocoran privasi.
+- **Penyelamat Google Form (Auto-Save Drafts):** Menyimpan ketikan dan isian Anda di Google Form ke penyimpanan lokal secara langsung (*real-time*). Jika tab tertutup tanpa sengaja, Anda dapat memulihkan draf tersebut dengan sekali klik.
+- **Tema Dinamis & Dukungan Native OS:** Tersedia pilihan tema Terang, Gelap, dan Sistem.
+- **Antarmuka Premium (Flat Design & Tab Layout):** Tampilan pengaturan bergaya aplikasi modern dengan bilah navigasi samping (sidebar) dan transisi halaman tanpa muat ulang.
+- **Sinkronisasi Akun:** Mengambil dan menyimpan daftar akun Google di latar belakang tanpa mengganggu layar aktif Anda.
 
 ## Cara Pemasangan
 

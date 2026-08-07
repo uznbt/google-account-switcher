@@ -10,7 +10,8 @@
     "scripting"
   ],
   "host_permissions": [
-    "*://*.google.com/*"
+    "*://*.google.com/*",
+    "*://*.zoom.us/*"
   ],
   "web_accessible_resources": [
     {
@@ -37,7 +38,10 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.google.com/*"],
+      "matches": [
+        "*://*.google.com/*",
+        "*://*.zoom.us/*"
+      ],
       "js": ["src/js/content.js"],
       "run_at": "document_idle",
       "all_frames": true

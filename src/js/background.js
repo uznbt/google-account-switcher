@@ -13,7 +13,9 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
       // Jangan redirect jika sudah ada index akun (/u/X/) atau parameter authuser
       if (!urlObj.pathname.includes('/u/') && !urlObj.searchParams.has('authuser')) {
         
-        chrome.storage.sync.get(['serviceAccounts', 'autoRedirectEnabled', 'customLinkRules'], (data) => {
+        chrome.storage.sync.get(['serviceAccounts', 'autoRedirectEnabled', 'customLinkRules', 'masterSwitchEnabled'], (data) => {
+          if (data.masterSwitchEnabled === false) return; // Ekstensi dimatikan
+
           const autoRedirectEnabled = data.autoRedirectEnabled !== undefined ? data.autoRedirectEnabled : true;
           
           if (autoRedirectEnabled) {

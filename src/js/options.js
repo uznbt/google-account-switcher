@@ -14,6 +14,50 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   let cachedAccountsList = [];
 
+  // Sidebar Navigation Logic
+  const navItems = document.querySelectorAll('.nav-item');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  const savedTab = localStorage.getItem('activeSettingsTab') || 'tab-settings';
+
+  navItems.forEach(nav => {
+    if (nav.getAttribute('data-target') === savedTab) {
+      nav.classList.add('active');
+    } else {
+      nav.classList.remove('active');
+    }
+  });
+
+  tabPanels.forEach(panel => {
+    if (panel.id === savedTab) {
+      panel.classList.add('active');
+    } else {
+      panel.classList.remove('active');
+    }
+  });
+
+  navItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = item.getAttribute('data-target');
+      
+      localStorage.setItem('activeSettingsTab', targetId);
+      
+      // Update active nav
+      navItems.forEach(nav => nav.classList.remove('active'));
+      item.classList.add('active');
+      
+      // Update active panel
+      tabPanels.forEach(panel => {
+        if (panel.id === targetId) {
+          panel.classList.add('active');
+        } else {
+          panel.classList.remove('active');
+        }
+      });
+    });
+  });
+
   // Theme Management
   function applyTheme(theme) {
     if (theme === 'dark') {
@@ -40,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (data.uiTheme) {
       applyTheme(data.uiTheme);
       updateThemeUI(data.uiTheme);
+      localStorage.setItem('uiTheme', data.uiTheme); // Simpan untuk reload berikutnya
     }
   });
 
@@ -49,12 +94,17 @@ document.addEventListener('DOMContentLoaded', () => {
       applyTheme(theme);
       updateThemeUI(theme);
       chrome.storage.sync.set({ uiTheme: theme });
+      localStorage.setItem('uiTheme', theme); // Untuk mencegah kedipan putih
     });
   });
 
   // Settings
+  const masterSwitchCheckbox = document.getElementById('masterSwitch');
   const autoRedirectCheckbox = document.getElementById('autoRedirect');
   const autoFallbackCheckbox = document.getElementById('autoFallback');
+  const autoMuteMicCheckbox = document.getElementById('autoMuteMic');
+  const autoMuteCamCheckbox = document.getElementById('autoMuteCam');
+  const autoSaveFormCheckbox = document.getElementById('autoSaveForm');
   const servicesGrid = document.getElementById('servicesGrid');
   const accountsGrid = document.getElementById('accountsGrid');
   const serviceCardTemplate = document.getElementById('serviceCardTemplate');
@@ -70,19 +120,48 @@ document.addEventListener('DOMContentLoaded', () => {
   let customLinkRules = [];
   
   // Initialize Data
-  chrome.storage.sync.get(['serviceAccounts', 'autoRedirectEnabled', 'autoFallbackEnabled', 'customLinkRules'], (data) => {
+  chrome.storage.sync.get(['serviceAccounts', 'autoRedirectEnabled', 'autoFallbackEnabled', 'autoMuteMicEnabled', 'autoMuteCamEnabled', 'autoSaveFormEnabled', 'customLinkRules', 'masterSwitchEnabled'], (data) => {
     if (data.serviceAccounts) {
       serviceAccounts = { ...serviceAccounts, ...data.serviceAccounts };
     }
     if (data.customLinkRules) {
       customLinkRules = data.customLinkRules;
     }
+    
+    if (masterSwitchCheckbox) {
+      masterSwitchCheckbox.checked = data.masterSwitchEnabled !== false; // default true
+      masterSwitchCheckbox.addEventListener('change', () => {
+        chrome.storage.sync.set({ masterSwitchEnabled: masterSwitchCheckbox.checked });
+      });
+    }
+
     autoRedirectCheckbox.checked = data.autoRedirectEnabled !== false; // default true
     
     if (autoFallbackCheckbox) {
       autoFallbackCheckbox.checked = data.autoFallbackEnabled !== false; // default true
       autoFallbackCheckbox.addEventListener('change', () => {
         chrome.storage.sync.set({ autoFallbackEnabled: autoFallbackCheckbox.checked });
+      });
+    }
+
+    if (autoMuteMicCheckbox) {
+      autoMuteMicCheckbox.checked = data.autoMuteMicEnabled !== false; // default true
+      autoMuteMicCheckbox.addEventListener('change', () => {
+        chrome.storage.sync.set({ autoMuteMicEnabled: autoMuteMicCheckbox.checked });
+      });
+    }
+
+    if (autoMuteCamCheckbox) {
+      autoMuteCamCheckbox.checked = data.autoMuteCamEnabled !== false; // default true
+      autoMuteCamCheckbox.addEventListener('change', () => {
+        chrome.storage.sync.set({ autoMuteCamEnabled: autoMuteCamCheckbox.checked });
+      });
+    }
+
+    if (autoSaveFormCheckbox) {
+      autoSaveFormCheckbox.checked = data.autoSaveFormEnabled === true; // default false
+      autoSaveFormCheckbox.addEventListener('change', () => {
+        chrome.storage.sync.set({ autoSaveFormEnabled: autoSaveFormCheckbox.checked });
       });
     }
     
@@ -236,9 +315,10 @@ document.addEventListener('DOMContentLoaded', () => {
       newRuleAccountOptions.appendChild(opt);
     });
     
-    if (cachedAccountsList.length > 0 && newRuleAccountIndex) {
-      newRuleAccountIndex.value = cachedAccountsList[0].index;
-      updateDisplay(newRuleSelectedDisplay, cachedAccountsList[0]);
+    // Biarkan "Pilih Akun..." sebagai teks awal.
+    // Jika newRuleAccountIndex belum punya nilai, kita kosongkan.
+    if (!newRuleAccountIndex.value) {
+      newRuleAccountIndex.value = "";
     }
   }
 
@@ -252,6 +332,16 @@ document.addEventListener('DOMContentLoaded', () => {
       customLinkRules.push({ url, accountIndex, id: Date.now().toString() });
       chrome.storage.sync.set({ customLinkRules }, () => {
         newRuleUrlInput.value = '';
+        newRuleAccountIndex.value = '';
+        
+        // Kembalikan tampilan ke "Pilih Akun..."
+        if (newRuleSelectedDisplay) {
+          newRuleSelectedDisplay.innerHTML = `
+            <img src="../../assets/images/default_avatar.png" alt="Avatar" class="avatar" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
+            <span class="name" style="font-size: 14px; font-weight: 500;">Pilih Akun...</span>
+          `;
+        }
+        
         renderRules();
       });
     });
@@ -312,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Sync Button
   document.getElementById('syncAccountsBtn').addEventListener('click', () => {
-    chrome.tabs.create({url: 'https://accounts.google.com/SignOutOptions?hl=id', active: true});
+    chrome.tabs.create({url: 'https://accounts.google.com/SignOutOptions?hl=id', active: false});
   });
 
   // Listen for storage changes from background or popup

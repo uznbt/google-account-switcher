@@ -126,7 +126,6 @@ label {
 
 .custom-select-wrapper.open .custom-select {
   border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -153,7 +152,6 @@ label {
 .native-select:focus {
   outline: none;
   border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 .dropdown-arrow {
@@ -245,7 +243,6 @@ label {
   border-top: none;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   z-index: 10;
   max-height: 220px;
   overflow-y: auto;
@@ -351,7 +348,6 @@ button {
   cursor: pointer;
   transition: background-color 0.2s, transform 0.1s;
   font-family: inherit;
-  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
 }
 
 button:hover {
@@ -363,13 +359,17 @@ button:active {
 }
 
 #status {
-  margin-top: 12px;
+  margin-top: 8px;
   font-size: 13px;
   text-align: center;
   color: #10b981;
   font-weight: 500;
-  min-height: 20px;
+  min-height: 0;
   transition: opacity 0.3s ease;
+}
+
+#status:empty {
+  display: none;
 }
 
 .theme-switcher {
@@ -417,7 +417,6 @@ button:active {
   padding: 0;
   background-color: var(--surface-color);
   border: 1px solid var(--border-color);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   color: var(--text-main);
   border-radius: 8px;
   display: flex;
@@ -430,4 +429,15 @@ button:active {
   background-color: var(--hover-bg);
   color: var(--primary-color);
   border-color: var(--primary-color);
+}
+
+.disabled-content {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: grayscale(100%);
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+#settingsContainer, #bottomSettingsContainer {
+  transition: opacity 0.3s ease, filter 0.3s ease;
 }

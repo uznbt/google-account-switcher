@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (data.uiTheme) {
       applyTheme(data.uiTheme);
       updateThemeUI(data.uiTheme);
+      localStorage.setItem('uiTheme', data.uiTheme);
     }
   });
 
@@ -35,11 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
       applyTheme(theme);
       updateThemeUI(theme);
       chrome.storage.sync.set({ uiTheme: theme });
+      localStorage.setItem('uiTheme', theme); // Untuk mencegah kedipan putih
     });
   });
 
   const autoRedirectCheckbox = document.getElementById('autoRedirect');
   const autoFallbackCheckbox = document.getElementById('autoFallback');
+  
+  const masterSwitchCheckbox = document.getElementById('masterSwitch');
+  const settingsContainer = document.getElementById('settingsContainer');
+  const bottomSettingsContainer = document.getElementById('bottomSettingsContainer');
   
   // Elements for custom select
   const customSelectWrapper = document.getElementById('customSelectWrapper');
@@ -162,7 +168,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Muat pengaturan yang tersimpan
-    chrome.storage.sync.get(['serviceAccounts', 'autoRedirectEnabled', 'autoFallbackEnabled'], (data) => {
+    chrome.storage.sync.get(['serviceAccounts', 'autoRedirectEnabled', 'autoFallbackEnabled', 'masterSwitchEnabled'], (data) => {
+      
+      if (masterSwitchCheckbox) {
+        masterSwitchCheckbox.checked = data.masterSwitchEnabled !== false; // default true
+        if (!masterSwitchCheckbox.checked) {
+          if (settingsContainer) settingsContainer.classList.add('disabled-content');
+          if (bottomSettingsContainer) bottomSettingsContainer.classList.add('disabled-content');
+        }
+        
+        masterSwitchCheckbox.addEventListener('change', () => {
+          const isEnabled = masterSwitchCheckbox.checked;
+          chrome.storage.sync.set({ masterSwitchEnabled: isEnabled });
+          if (settingsContainer) {
+            if (isEnabled) {
+              settingsContainer.classList.remove('disabled-content');
+              if (bottomSettingsContainer) bottomSettingsContainer.classList.remove('disabled-content');
+            } else {
+              settingsContainer.classList.add('disabled-content');
+              if (bottomSettingsContainer) bottomSettingsContainer.classList.add('disabled-content');
+            }
+          }
+        });
+      }
+
       if (data.serviceAccounts !== undefined) {
         serviceAccounts = { ...serviceAccounts, ...data.serviceAccounts };
       }
@@ -552,9 +581,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Tampilkan notifikasi kecil bahwa sinkronisasi sukses
         const status = document.getElementById('status');
         if (status) {
-          status.textContent = "Data akun berhasil disinkronkan!";
           status.style.opacity = 1;
-          setTimeout(() => { status.style.opacity = 0; }, 3000);
+          status.style.display = 'block'; // force display block if needed, though :empty handles it
+          status.textContent = "Data akun berhasil disinkronkan!";
+          setTimeout(() => { 
+            status.style.opacity = 0; 
+            setTimeout(() => { status.textContent = ""; }, 300); // wait for fade out
+          }, 3000);
         }
       }
     }
